@@ -31,7 +31,10 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Allow all origins
-    allow_credentials=True,
+    # Do not allow credentials when using wildcard origins — browsers disallow
+    # Access-Control-Allow-Origin: * together with Access-Control-Allow-Credentials: true.
+    # Set to False because the frontend doesn't use cookies/auth credentials.
+    allow_credentials=False,
     allow_methods=["*"],  # Allow all methods
     allow_headers=["*"],  # Allow all headers
 )
